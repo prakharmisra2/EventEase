@@ -1,15 +1,15 @@
 const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
-const { connectDB, sequelize } = require('./config/database');
+const { connectDB, sequelize } = require('./src/config/database');
 
 // Load models
-const { User, Event, Booking } = require('./models');
+const { User, Event, Booking } = require('./src/models');
 
 // Load routes
-const authRoutes = require('./routes/authRoutes');
-const eventRoutes = require('./routes/eventRoutes');
-const bookingRoutes = require('./routes/bookingRoutes');
+const authRoutes = require('./src/routes/authRoutes');
+const eventRoutes = require('./src/routes/eventRoutes');
+const bookingRoutes = require('./src/routes/bookingRoutes');
 
 // Load env vars
 dotenv.config();
