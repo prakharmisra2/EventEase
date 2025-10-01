@@ -27,7 +27,6 @@ const allowedOrigins = [
   process.env.CLIENT_URL,
   'http://localhost:3000',
   'http://localhost:3001',
-  // Add your Vercel domain here after deployment
   'https://event-ease-ruby.vercel.app/'
 ].filter(Boolean);
 
