@@ -15,6 +15,8 @@ Admins only can add new events and track seats booked attendees etc.
 * Book events that are live
 * Explore my bookings
 * Booking status and confirmation details
+* Cancel booking
+* Calander View on my bookings
 
 ### Logged-in as Admin:
 * Access admin panel

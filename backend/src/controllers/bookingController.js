@@ -255,74 +255,67 @@ exports.createBooking = async (req, res) => {
   // @access  Private
   exports.cancelBooking = async (req, res) => {
     const transaction = await sequelize.transaction();
-    
+    console.log('Cancelling booking with ID:', req.params.id);
+  
     try {
+      // Step 1: Lock only the Booking row
       const booking = await Booking.findByPk(req.params.id, {
-        include: [
-          {
-            model: Event,
-            as: 'event'
-          }
-        ],
         lock: transaction.LOCK.UPDATE,
         transaction
       });
-      
+  
+      console.log('Found booking:', booking);
       if (!booking) {
         await transaction.rollback();
-        return res.status(404).json({
-          success: false,
-          message: 'Booking not found'
-        });
+        return res.status(404).json({ success: false, message: 'Booking not found' });
       }
-      
-      // Check ownership
+  
+      // Ownership check
       if (booking.userId !== req.user.id) {
         await transaction.rollback();
-        return res.status(403).json({
-          success: false,
-          message: 'Not authorized to cancel this booking'
-        });
+        return res.status(403).json({ success: false, message: 'Not authorized to cancel this booking' });
       }
-      
-      // Check if already cancelled
+  
+      // Already cancelled?
       if (booking.status === 'cancelled') {
         await transaction.rollback();
-        return res.status(400).json({
-          success: false,
-          message: 'Booking is already cancelled'
-        });
+        return res.status(400).json({ success: false, message: 'Booking is already cancelled' });
       }
-      
-      // Check if event has already started
-      const eventStatus = booking.event.getStatus();
+  
+      // Step 2: Load event separately in same transaction
+      const event = await booking.getEvent({ transaction });
+      if (!event) {
+        await transaction.rollback();
+        return res.status(404).json({ success: false, message: 'Event not found' });
+      }
+  
+      // Check event status
+      const eventStatus = event.getStatus();
       if (eventStatus === 'Ongoing' || eventStatus === 'Completed') {
         await transaction.rollback();
-        return res.status(400).json({
-          success: false,
-          message: `Cannot cancel booking for ${eventStatus.toLowerCase()} event`
-        });
+        return res.status(400).json({ success: false, message: `Cannot cancel booking for ${eventStatus.toLowerCase()} event` });
       }
-      
-      // Update booking status
-      await booking.update({
-        status: 'cancelled'
-      }, { transaction });
-      
-      // Update event booked seats
-      await booking.event.update({
-        bookedSeats: booking.event.bookedSeats - booking.seats
-      }, { transaction });
-      
+  
+      // Step 3: Update booking
+      await booking.update({ status: 'cancelled' }, { transaction });
+  
+      // Step 4: Update event seats
+      await event.update(
+        { bookedSeats: event.bookedSeats - booking.seats },
+        { transaction }
+      );
+  
       await transaction.commit();
-      
+  
       res.status(200).json({
         success: true,
         message: 'Booking cancelled successfully',
         data: booking
       });
+  
     } catch (error) {
       await transaction.rollback();
+      console.log('Error cancelling booking:', error);
       res.status(500).json({
         success: false,
         message: 'Server error',
@@ -330,6 +323,7 @@ exports.createBooking = async (req, res) => {
       });
     }
   };
+  
   
   // @desc    Get all bookings (Admin only)
   // @route   GET /api/bookings
