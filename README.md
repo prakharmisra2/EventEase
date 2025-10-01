@@ -32,13 +32,29 @@ Admins only can add new events and track seats booked attendees etc.
 * Database: PostgreSQL, sequelize
 * Authentication: JWT based
 
+
+### To test 
+* Test Admin: 
+    email: admin@gamil.com
+    password: admin123
+
+* Test User:
+    email: user@gmail.com
+    password: user123
+    
 # Setup 
+#### Prerequisites
+* Node.js
+* PostgreSQL
+* npm
 
 ### frontend
 * Goto frontend folder
 * setup `.env` file and define 'REACT_APP_API_URL' as your URL with suitable port number
 * run  `npm install`
 * run  `npm run start`
+
+
 
 ### backend
 * Goto backend folder

@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
 const { connectDB, sequelize } = require('./src/config/database');
+const { seedUsers } = require('./src/utils/seedData');
 
 // Load models
 const { User, Event, Booking } = require('./src/models');
@@ -68,10 +69,11 @@ const startServer = async () => {
     await connectDB();
     
     // Sync database (creates tables if they don't exist)
-    // Use { force: true } to drop and recreate tables (WARNING: will delete all data)
-    // Use { alter: true } to update tables based on model changes
     await sequelize.sync({ alter: false });
     console.log('✅ Database synced');
+    
+    // Seed default users (admin and test user)
+    await seedUsers();
     
     // Start listening
     app.listen(PORT, () => {
@@ -82,6 +84,18 @@ const startServer = async () => {
 📍 Server running on port: ${PORT}
 🌍 Environment: ${process.env.NODE_ENV || 'development'}
 🔗 API Base URL: http://localhost:${PORT}/api
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+👤 Default Test Accounts:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Admin Account:
+  📧 Email: admin@gmail.com
+  🔑 Password: admin123
+  👔 Role: admin
+
+User Account:
+  📧 Email: user@gmail.com
+  🔑 Password: user123
+  👤 Role: user
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
       `);
     });
