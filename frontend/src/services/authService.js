@@ -13,7 +13,9 @@ const authService = {
 
   // Login user
   login: async (credentials) => {
+    console.log("logging in")
     const response = await api.post('/auth/login', credentials);
+    console.log("login response", response)
     if (response.data.success) {
       localStorage.setItem('token', response.data.data.token);
       localStorage.setItem('user', JSON.stringify(response.data.data.user));
