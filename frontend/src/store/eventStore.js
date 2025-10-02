@@ -39,9 +39,9 @@ const useEventStore = create((set) => ({
   createEvent: async (eventData) => {
     set({ loading: true, error: null });
     try {
-        console.log('Creating event with data:', eventData);
+      //console.log('Creating event with data:', eventData);
       const data = await eventService.createEvent(eventData);
-      console.log('Event created:', data);
+      //console.log('Event created:', data);
       set((state) => ({ events: [...state.events, data.data], loading: false }));
       return data;
     } catch (error) {

@@ -112,19 +112,6 @@ const startServer = async () => {
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 📍 Server running on port: ${PORT}
 🌍 Environment: ${process.env.NODE_ENV || 'development'}
-🔗 API Base URL: http://localhost:${PORT}/api
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-👤 Default Test Accounts:
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Admin Account:
-  📧 Email: admin@gmail.com
-  🔑 Password: admin123
-  👔 Role: admin
-
-User Account:
-  📧 Email: user@gmail.com
-  🔑 Password: user123
-  👤 Role: user
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
       `);
     });

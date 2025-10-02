@@ -14,9 +14,9 @@ const seedUsers = async () => {
         password: 'admin123',
         role: 'admin'
       });
-      console.log('✅ Admin user created: admin@gmail.com / admin123');
+      //console.log('✅ Admin user created: admin@gmail.com / admin123');
     } else {
-      console.log('ℹ️  Admin user already exists');
+      //console.log('ℹ️  Admin user already exists');
     }
 
     // Check if test user exists
@@ -31,9 +31,9 @@ const seedUsers = async () => {
         password: 'user123',
         role: 'user'
       });
-      console.log('✅ Test user created: user@gmail.com / user123');
+      //console.log('✅ Test user created: user@gmail.com / user123');
     } else {
-      console.log('ℹ️  Test user already exists');
+      //console.log('ℹ️  Test user already exists');
     }
 
   } catch (error) {

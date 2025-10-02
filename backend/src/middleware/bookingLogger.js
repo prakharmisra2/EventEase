@@ -18,7 +18,7 @@ const bookingLogger = (req, res, next) => {
 🕐 Timestamp: ${formatDateTime(new Date())}
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
       `;
-      console.log(logMessage);
+      //console.log(logMessage);
     }
     
     // Call original send function

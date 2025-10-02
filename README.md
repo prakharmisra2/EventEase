@@ -2,6 +2,8 @@
 EventEase is a platform where users can explore and book events such as concerts, webinars, workshops etc. 
 Admins only can add new events and track seats booked attendees etc.
 
+### `Live link of the web app: ` [https://event-ease-ruby.vercel.app/](https://event-ease-ruby.vercel.app/)
+
 # Features implemented
 
 ### Public User:

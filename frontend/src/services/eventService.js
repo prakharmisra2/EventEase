@@ -23,9 +23,9 @@ const eventService = {
 
   // Create event (Admin)
   createEvent: async (eventData) => {
-    console.log('Creating event in service with data:', eventData);
+    //console.log('Creating event in service with data:', eventData);
     const response = await api.post('/events', eventData);
-    console.log('Event created in service:', response.data);
+    //console.log('Event created in service:', response.data);
     return response.data;
   },
 

@@ -255,7 +255,7 @@ exports.createBooking = async (req, res) => {
   // @access  Private
   exports.cancelBooking = async (req, res) => {
     const transaction = await sequelize.transaction();
-    console.log('Cancelling booking with ID:', req.params.id);
+    //console.log('Cancelling booking with ID:', req.params.id);
   
     try {
       // Step 1: Lock only the Booking row
@@ -264,7 +264,7 @@ exports.createBooking = async (req, res) => {
         transaction
       });
   
-      console.log('Found booking:', booking);
+      //console.log('Found booking:', booking);
       if (!booking) {
         await transaction.rollback();
         return res.status(404).json({ success: false, message: 'Booking not found' });
@@ -315,7 +315,7 @@ exports.createBooking = async (req, res) => {
   
     } catch (error) {
       await transaction.rollback();
-      console.log('Error cancelling booking:', error);
+      //console.log('Error cancelling booking:', error);
       res.status(500).json({
         success: false,
         message: 'Server error',

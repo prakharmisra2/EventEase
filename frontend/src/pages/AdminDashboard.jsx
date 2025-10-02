@@ -22,7 +22,7 @@ const AdminDashboard = () => {
   }, [fetchEvents]);
 
   const handleCreateEvent = async (eventData) => {
-    console.log('Creating event with data:', eventData);
+    //console.log('Creating event with data:', eventData);
     try {
       await createEvent(eventData);
       toast.success('Event created successfully');

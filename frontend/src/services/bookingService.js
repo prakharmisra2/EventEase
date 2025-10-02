@@ -21,7 +21,7 @@ const bookingService = {
 
   // Cancel booking
   cancelBooking: async (id) => {
-    console.log('Cancelling booking with ID:', id);
+    //console.log('Cancelling booking with ID:', id);
     const response = await api.put(`/bookings/${id}/cancel`);
     return response.data;
   },

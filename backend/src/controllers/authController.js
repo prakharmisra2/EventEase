@@ -64,7 +64,7 @@ exports.register = async (req, res) => {
 // @route   POST /api/auth/login
 // @access  Public
 exports.login = async (req, res) => {
-  console.log("Login request body:", req.body);
+  //console.log("Login request body:", req.body);
   try {
     const { email, password } = req.body;
     
@@ -79,7 +79,7 @@ exports.login = async (req, res) => {
     // Check for user
     const user = await User.findOne({ where: { email } });
     if (!user) {
-      console.log("User not found with email:", email);
+      //console.log("User not found with email:", email);
       return res.status(401).json({
         success: false,
         message: 'Invalid credentials'

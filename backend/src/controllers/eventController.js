@@ -146,7 +146,7 @@ exports.createEvent = async (req, res) => {
         message: 'Please provide all required fields'
       });
     }
-    console.log("Creating event with data:", req.body);
+    //console.log("Creating event with data:", req.body);
     // Create event
     const event = await Event.create({
       eventId: generateEventId(eventDate),
@@ -162,9 +162,9 @@ exports.createEvent = async (req, res) => {
       imageUrl,
       createdBy: req.user.id
     });
-    console.log("Event created:", event);
+    //console.log("Event created:", event);
     const eventData = event.toJSON();
-    console.log("creating event",eventData);
+    //console.log("creating event",eventData);
     res.status(201).json({
       success: true,
       message: 'Event created successfully',
@@ -176,7 +176,7 @@ exports.createEvent = async (req, res) => {
       }
     });
   } catch (error) {
-    console.log(error);
+    //console.log(error);
     res.status(500).json({
       success: false,
       message: 'Server error',
